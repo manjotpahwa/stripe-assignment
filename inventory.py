@@ -1,3 +1,4 @@
+import logging
 import os
 from functools import reduce
 
@@ -35,7 +36,7 @@ class Inventory:
         return stock
 
     def product_exists(self, item):
-        print('Checking if product exists')
+        logging.debug('Checking if product exists')
         sku = item['id']
         qty = item['qty']
         if sku in self.skus and item['qty'] <= self.products[sku]['qty']:
@@ -43,15 +44,15 @@ class Inventory:
         return False
 
     def get_cost(self, item):
-        print('Getting single product cost')
+        logging.debug('Getting single product cost')
         return item['qty'] * self.products[item['id']]['price']
 
     def get_item(self, item_id):
-        print('Returning item with id ' + item_id)
+        logging.debug('Returning item with id ' + item_id)
         return self.products[item_id]
 
     def get_products_total_cost(self, items):
-        print('Calculating total cost')
+        logging.debug('Calculating total cost')
         total = 0
         for item in items:
             if self.product_exists(item):

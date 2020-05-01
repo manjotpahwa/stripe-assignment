@@ -1,11 +1,11 @@
 import inventory
+import logging
 
 
 class Cart:
     def __init__(self, items=None):
-        print('Creating cart')
+        logging.debug('Creating cart')
         self.items = items or {}
-        print(self.items)
 
     def get_total(self):
         total = 0

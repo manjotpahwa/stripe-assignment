@@ -24,7 +24,7 @@ def calculate_order_amount(c):
 
 
 def create_cart(items):
-    print('Creating cart')
+    app.logger.debug('Creating cart')
     cart_items = {}
 
     for item in items:
@@ -73,8 +73,8 @@ def create_payment():
             currency=data['currency'],
             metadata={'integration_check': 'accept_a_payment'},
         )
-        print("Intent")
-        print(intent)
+        app.logger.debug("Intent")
+        app.logger.debug(intent)
 
         return jsonify({
           'clientSecret': intent['client_secret']
@@ -84,4 +84,4 @@ def create_payment():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
