@@ -43,8 +43,12 @@ class Inventory:
         return False
 
     def get_cost(self, item):
-        print('getting single cost')
+        print('Getting single product cost')
         return item['qty'] * self.products[item['id']]['price']
+
+    def get_item(self, item_id):
+        print('Returning item with id ' + item_id)
+        return self.products[item_id]
 
     def get_products_total_cost(self, items):
         print('Calculating total cost')
@@ -53,3 +57,8 @@ class Inventory:
             if self.product_exists(item):
                 total += self.get_cost(item)
         return total
+
+    def update_inventory(cart):
+        items_dict = cart.get_items()
+        for item_id, item_val in items_dict.items():
+            self.products[item_id]['qty'] -= item_val['qty']
