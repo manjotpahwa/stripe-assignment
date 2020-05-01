@@ -25,7 +25,8 @@ export default function CheckoutForm() {
         body: JSON.stringify({
           items: [{ id: "2LTTufVZkd", qty: 2}],
           country: "us",
-          currency: "usd"
+          currency: "usd",
+          email: 'shopperjoe@gmail.com'
         })
       })
       .then(res => {

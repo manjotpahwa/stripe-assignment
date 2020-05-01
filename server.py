@@ -37,13 +37,12 @@ def create_cart(items):
     return c
 
 
-def add_customer(customer):
+def create_customer(customer_email):
     customers = stripe.Customer.list()
-    email = customer['email']
     for c in customers:
-        if c.email == email:
-            return
-    stripe.Customer.create(email=email)
+        if c.email == customer_email:
+            return c
+    return stripe.Customer.create(email=customer_email)
 
 
 @app.route('/get-products-in-stock', methods=['GET'])
@@ -68,6 +67,7 @@ def create_payment():
     try:
         data = json.loads(request.data)
         c = create_cart(data['items'])
+        customer = create_customer(data['email'])
         intent = stripe.PaymentIntent.create(
             amount=calculate_order_amount(c),
             currency=data['currency'],
