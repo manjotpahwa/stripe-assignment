@@ -30,7 +30,7 @@ class Inventory:
 
     def get_products_in_stock(self):
         stock = {}
-        for (k, v) in self.products.item():
+        for (k, v) in self.products.items():
             if v['qty'] > 0:
                 stock[k] = v
         return stock

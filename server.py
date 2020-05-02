@@ -7,18 +7,18 @@ import os
 import stripe
 import cart
 import inventory
-stripe.api_key = "sk_test_edhurKZR5OMK0Wvl7uYLyu1n"
-webhook_secret = "whsec_K8reb65yXmHSEyKkSMx8h84rozwb5R69"
-
-
 
 from flask import Flask, render_template, jsonify, request
+
+stripe.api_key = "sk_test_edhurKZR5OMK0Wvl7uYLyu1n"
+webhook_secret = "whsec_K8reb65yXmHSEyKkSMx8h84rozwb5R69"
 
 
 app = Flask(__name__, static_folder=".",
             static_url_path="", template_folder=".")
 
 curr_inventory = inventory.Inventory()
+curr_cart = cart.Cart()
 
 
 def calculate_order_amount(c):
@@ -35,8 +35,8 @@ def create_cart(items):
         i['qty'] = item['qty']
         cart_items[item_id] = i
 
-    c = cart.Cart(cart_items)
-    return c
+    curr_cart.set_items(cart_items)
+    return curr_cart
 
 
 def create_customer(customer_email):
@@ -47,27 +47,41 @@ def create_customer(customer_email):
     return stripe.Customer.create(email=customer_email)
 
 
+@app.route('/', methods=['GET'])
+def hello_world():
+    return 'Hello world!', 200
+
+
 @app.route('/get-products-in-stock', methods=['GET'])
 def get_products_in_stock():
-    return curr_inventory.get_products_in_stock()
+    return curr_inventory.get_products_in_stock(), 200
+
+
+@app.route('/show-cart', methods=['GET'])
+def show_cart():
+    try:
+        app.logger.info("Showing cart: ")
+        app.logger.info(curr_cart.get_items())
+        return curr_cart.get_items(), 200
+    except Exception as e:
+        app.logger.error("Error showing cart: " + str(e))
+        return jsonify(error=str(e)), 403
 
 
 @app.route('/show-total', methods=['GET'])
-def show_total(items):
+def show_total():
     try:
-        data = json.loads(request.data)
-        c = create_cart(data['items'])
         return jsonify({
-            'total': calculate_order_amount(c)
+            'total': calculate_order_amount(curr_cart)
             })
     except Exception as e:
+        app.logger.error("Error showing total: " + str(e))
         return jsonify(error=str(e)), 403
 
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
     payload = request.data.decode("utf-8")
-    print(payload)
     received_sig = request.headers.get("Stripe-Signature", None)
 
     event = None
@@ -76,13 +90,13 @@ def webhook():
         event = stripe.Webhook.construct_event(
             payload, received_sig, webhook_secret)
     except ValueError:
-        print("Error while decoding event!")
+        app.logger.error("Error while decoding event!")
         return "Bad payload", 400
     except stripe.error.SignatureVerificationError:
-        print("Invalid signature!")
+        app.logger.error("Invalid signature!")
         return "Bad signature", 400
 
-    print(
+    app.logger.debug(
         "Received event: id={id}, type={type}".format(
             id=event.id, type=event.type
         )
@@ -95,10 +109,10 @@ def webhook():
 def create_payment():
     try:
         data = json.loads(request.data)
-        c = create_cart(data['items'])
+        curr_cart = create_cart(data['items'])
         customer = create_customer(data['email'])
         intent = stripe.PaymentIntent.create(
-            amount=calculate_order_amount(c),
+            amount=calculate_order_amount(curr_cart),
             currency=data['currency'],
             metadata={'integration_check': 'accept_a_payment'},
         )
