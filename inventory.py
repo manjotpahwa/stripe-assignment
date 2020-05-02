@@ -60,6 +60,7 @@ class Inventory:
         return total
 
     def update_inventory(self, cart):
+        logging.debug('Updating inventory after successful payment')
         items_dict = cart.get_items()
         for item_id, item_val in items_dict.items():
             self.products[item_id]['qty'] -= item_val['qty']
