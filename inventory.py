@@ -59,7 +59,7 @@ class Inventory:
                 total += self.get_cost(item)
         return total
 
-    def update_inventory(cart):
+    def update_inventory(self, cart):
         items_dict = cart.get_items()
         for item_id, item_val in items_dict.items():
             self.products[item_id]['qty'] -= item_val['qty']

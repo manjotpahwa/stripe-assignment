@@ -47,6 +47,14 @@ def create_customer(customer_email):
     return stripe.Customer.create(email=customer_email)
 
 
+def update_cart_post_payment():
+    curr_cart.set_items({})
+
+
+def update_inventory_post_payment():
+    curr_inventory.update_inventory(curr_cart)
+
+
 @app.route('/', methods=['GET'])
 def hello_world():
     return 'Hello world!', 200
@@ -101,6 +109,10 @@ def webhook():
             id=event.id, type=event.type
         )
     )
+
+    if event.type == 'charge.succeeded':
+        update_inventory_post_payment()
+        update_cart_post_payment()
 
     return "Webhook event received", 200
 
