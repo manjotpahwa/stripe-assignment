@@ -123,6 +123,7 @@ def create_payment():
         data = json.loads(request.data)
         curr_cart = create_cart(data['items'])
         customer = create_customer(data['email'])
+        app.logger.debug(customer)
         intent = stripe.PaymentIntent.create(
             amount=calculate_order_amount(curr_cart),
             currency=data['currency'],
