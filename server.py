@@ -18,6 +18,8 @@ app = Flask(__name__, static_folder=".",
             static_url_path="", template_folder=".")
 
 curr_inventory = inventory.Inventory()
+# TODO(manjot): This cart is silly and a blanket one irrespective of customers.
+# Add the option to have it on per customer basis.
 curr_cart = cart.Cart()
 
 
