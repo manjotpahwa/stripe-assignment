@@ -11,6 +11,8 @@ export default function CheckoutForm() {
   const [processing, setProcessing] = useState('');
   const [disabled, setDisabled] = useState(true);
   const [clientSecret, setClientSecret] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const stripe = useStripe();
   const elements = useElements();
 
@@ -26,7 +28,7 @@ export default function CheckoutForm() {
           items: [{ id: "2LTTufVZkd", qty: 2}],
           country: "us",
           currency: "usd",
-          email: 'shopperjoe@gmail.com'
+          email: email
         })
       })
       .then(res => {
@@ -70,7 +72,8 @@ export default function CheckoutForm() {
       payment_method: {
         card: elements.getElement(CardElement),
         billing_details: {
-          name: ev.target.name.value
+          name: name,
+          email: email
         }
       }
     });
@@ -85,20 +88,38 @@ export default function CheckoutForm() {
     }
   };
 
+  const handleNameChange = async ev => {
+    ev.preventDefault();
+    setName(ev.target.value);
+  };
+
+  const handleEmailChange = async ev => {
+    ev.preventDefault();
+    setEmail(ev.target.value);
+  };
+
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
+      <label>
+        Name:
+        <input type="text" name="name" onChange={handleNameChange}/>
+      </label>
+      <label>
+        Email:
+        <input type="text" name="email"  onChange={handleEmailChange}/>
+      </label>
       <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
       <button
         disabled={processing || disabled || succeeded}
         id="submit"
       >
-        <span id="button-text">
-          {processing ? (
-            <div className="spinner" id="spinner"></div>
-          ) : (
-            "Pay"
-          )}
-        </span>
+      <span id="button-text">
+        {processing ? (
+          <div className="spinner" id="spinner"></div>
+        ) : (
+          "Pay"
+        )}
+      </span>
       </button>
       {/* Show any error that happens when processing the payment */}
       {error && (
