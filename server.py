@@ -67,8 +67,8 @@ def get_products_in_stock():
     return curr_inventory.get_products_in_stock(), 200
 
 
-@app.route('/show-cart', methods=['GET'])
-def show_cart():
+@app.route('/get-cart', methods=['GET'])
+def get_cart():
     try:
         app.logger.info("Showing cart: ")
         app.logger.info(curr_cart.get_items())
@@ -78,8 +78,8 @@ def show_cart():
         return jsonify(error=str(e)), 403
 
 
-@app.route('/show-total', methods=['GET'])
-def show_total():
+@app.route('/get-total', methods=['GET'])
+def get_total():
     try:
         return jsonify({
             'total': calculate_order_amount(curr_cart)
