@@ -42,6 +42,9 @@ def create_cart(items):
 
 
 def create_customer(customer_email):
+    # TODO(manjot): we should probably add a customer entry to our ecommerce
+    # store's own database first.
+    #
     customers = stripe.Customer.list()
     for c in customers:
         if c.email == customer_email:
@@ -113,6 +116,8 @@ def webhook():
     )
 
     if event.type == 'charge.succeeded':
+        # TODO(manjot): Potentially crearte rewards for customer based on
+        # their purchase history.
         update_inventory_post_payment()
         update_cart_post_payment()
 
