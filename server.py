@@ -8,6 +8,8 @@ import stripe
 import cart
 import inventory
 stripe.api_key = "sk_test_edhurKZR5OMK0Wvl7uYLyu1n"
+webhook_secret = "whsec_K8reb65yXmHSEyKkSMx8h84rozwb5R69"
+
 
 
 from flask import Flask, render_template, jsonify, request
@@ -60,6 +62,33 @@ def show_total(items):
             })
     except Exception as e:
         return jsonify(error=str(e)), 403
+
+
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    payload = request.data.decode("utf-8")
+    print(payload)
+    received_sig = request.headers.get("Stripe-Signature", None)
+
+    event = None
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, received_sig, webhook_secret)
+    except ValueError:
+        print("Error while decoding event!")
+        return "Bad payload", 400
+    except stripe.error.SignatureVerificationError:
+        print("Invalid signature!")
+        return "Bad signature", 400
+
+    print(
+        "Received event: id={id}, type={type}".format(
+            id=event.id, type=event.type
+        )
+    )
+
+    return "Webhook event received", 200
 
 
 @app.route('/create-payment-intent', methods=['POST'])
