@@ -1,4 +1,4 @@
-<h1 align="center"> Stripe PaymentIntent API Integration</h1>
+<h1 align="center"> Stripe PaymentsIntent API Integration</h1>
 
 Welcome to the Trailblazer Sneaker shop!
 [![NPM version](https://badge.fury.io/js/tiny-npm-license.svg)](https://www.npmjs.org/package/tiny-npm-license)
@@ -8,11 +8,13 @@ Welcome to the Trailblazer Sneaker shop!
 </div>
 
 
-As an owner of an ecommerce store, you will want to integrate with the payments API for Stripe. This is a simple way to build a checkout form that collects card details. Included are some basic build and run scripts you can use to start up the application.
+As an owner of an ecommerce store, you will want to integrate with the payments API for Stripe. This is a simple way to build a checkout form that collects name, email, card details. Included are some basic build and run scripts you can use to start up the application.
 
-## Running the sample
+## Setup
 
-1. Build the server
+### Build & Run
+
+1. Build the backend server
 
 ```
 pip3 install -r requirements.txt
@@ -41,6 +43,15 @@ npm install
 npm start
 ```
 
-5. Go to [http://localhost:3000/checkout](http://localhost:3000/checkout)
+### Test
+
+1. Verify your cart is full of the items Nike Zoom Fly 2 units by going to http://localhost:4242/get-cart. Your total of 300 should be visible at http://localhost:4242/get-total.
+
+1. Go to [http://localhost:3000/checkout](http://localhost:3000/checkout)
 
 Enter your name and email address in the form provided. Enter card details such as "4242 4242 4242 4242" for testing a successful payment. Enter any valid values for the rest of the options such as CVV, expiration date and zip code. Press "Pay". You should see the payment go through successfully.
+
+
+1. Verify your total is now 0 and you cart is now empty by going to http://localhost:4242/get-total and  http://localhost:4242/get-cart respectively.
+
+
