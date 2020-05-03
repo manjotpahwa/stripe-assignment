@@ -61,6 +61,13 @@ def update_inventory_post_payment():
     curr_inventory.update_inventory(curr_cart)
 
 
+def is_failed_event(event_type):
+    if event_type == 'charge.failed' or \
+            event_type == 'payment_intent.payment_failed':
+                return True
+    return False
+
+
 @app.route('/', methods=['GET'])
 def hello_world():
     return 'Hello world!', 200
@@ -121,6 +128,10 @@ def webhook():
         # their purchase history.
         update_inventory_post_payment()
         update_cart_post_payment()
+
+    elif is_failed_event(event.type):
+        # handle failures and do retries.
+        app.logger.error("Payment failed event type " + event.type)
 
     return "Webhook event received", 200
 
