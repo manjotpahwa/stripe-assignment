@@ -123,7 +123,8 @@ def webhook():
         )
     )
 
-    if event.type == 'charge.succeeded':
+    if event.type == 'charge.succeeded' or \
+            event.type == 'payment_intent.succeeded':
         # TODO(manjot): Potentially crearte rewards for customer based on
         # their purchase history.
         update_inventory_post_payment()
