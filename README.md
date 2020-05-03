@@ -1,4 +1,4 @@
-<h1 align="center"> Stripe PaymentsIntent API Integration</h1>
+<h1 align="center"> Stripe PaymentIntents API Integration</h1>
 
 Welcome to the Trailblazer Sneaker shop!
 [![NPM version](https://badge.fury.io/js/tiny-npm-license.svg)](https://www.npmjs.org/package/tiny-npm-license)
@@ -9,6 +9,16 @@ Welcome to the Trailblazer Sneaker shop!
 
 
 As an owner of an ecommerce store, you will want to integrate with the payments API for Stripe. This is a simple way to build a checkout form that collects name, email, card details. Included are some basic build and run scripts you can use to start up the application.
+
+## Overview
+
+This guide is an integration with the PaymentIntents API for  Stripe.
+1. The frontend form takes in basic payment details such as name, email and card details. 
+1. The backend receives this request and creates a new PaymentIntents request and customer object in Stripe. 
+1. Then it makes the payment request to Stripe and sends the client secret back to the frontend.
+1. The client confirms the payment using the client secret.
+1. Webhooks wait on hearing about the successful completion of the charge and perform post payment actions.
+
 
 ## Setup
 
