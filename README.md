@@ -1,4 +1,4 @@
-<h1 align="center"> Stripe PaymentIntent API Integration [![npm-version][npm-badge]][npm-link] </h1>
+<h1 align="center"> Stripe PaymentIntent API Integration</h1>
 
 Welcome to the Trailblazer Sneaker shop!
 [![NPM version](https://badge.fury.io/js/tiny-npm-license.svg)](https://www.npmjs.org/package/tiny-npm-license)
