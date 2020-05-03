@@ -144,7 +144,7 @@ def create_payment():
         customer = create_customer(data['email'])
         app.logger.debug(customer)
         intent = stripe.PaymentIntent.create(
-            amount=calculate_order_amount(curr_cart),
+            amount=calculate_order_amount(curr_cart) * 100,
             currency=data['currency'],
             metadata={'integration_check': 'accept_a_payment'},
         )
