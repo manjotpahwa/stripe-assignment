@@ -43,15 +43,28 @@ npm install
 npm start
 ```
 
-### Test
+### Successful Payment Test
 
 1. Verify your cart is full of the items Nike Zoom Fly 2 units by going to http://localhost:4242/get-cart. Your total of 300 should be visible at http://localhost:4242/get-total.
 
-1. Go to [http://localhost:3000/checkout](http://localhost:3000/checkout)
-
-Enter your name and email address in the form provided. Enter card details such as "4242 4242 4242 4242" for testing a successful payment. Enter any valid values for the rest of the options such as CVV, expiration date and zip code. Press "Pay". You should see the payment go through successfully.
-
+1. Go to [http://localhost:3000/checkout](http://localhost:3000/checkout). Enter your name and email address in the form provided. Enter card details "4242 4242 4242 4242" for testing a successful payment. Enter any valid values for the rest of the options such as CVV, expiration date and zip code. Press "Pay". You should see the payment go through successfully.
 
 1. Verify your total is now 0 and you cart is now empty by going to http://localhost:4242/get-total and  http://localhost:4242/get-cart respectively.
 
 
+### Successful Payment with Authentication Test
+
+1. Verify your cart is full of the items Nike Zoom Fly 2 units by going to http://localhost:4242/get-cart. Your total of 300 should be visible at http://localhost:4242/get-total.
+
+1. Go to [http://localhost:3000/checkout](http://localhost:3000/checkout). Enter your name and email address in the form provided. Enter card details "4000 0025 0000 3155" for testing a successful payment. Enter any valid values for the rest of the options such as CVV, expiration date and zip code. Press "Pay". You should see the payment go through successfully.
+
+1. Verify your total is now 0 and you cart is now empty by going to http://localhost:4242/get-total and  http://localhost:4242/get-cart respectively.
+
+
+### Insufficient Balance Test
+
+1. Verify your cart is full of the items Nike Zoom Fly 2 units by going to http://localhost:4242/get-cart. Your total of 300 should be visible at http://localhost:4242/get-total.
+
+1. Go to [http://localhost:3000/checkout](http://localhost:3000/checkout). Enter your name and email address in the form provided. Enter card details "4000 0000 0000 9995" for testing a successful payment. Enter any valid values for the rest of the options such as CVV, expiration date and zip code. Press "Pay". You should see the payment go through successfully.
+
+1. Verify your total is still 300 and you cart is full of the same items by going to http://localhost:4242/get-total and  http://localhost:4242/get-cart respectively.
