@@ -1,8 +1,10 @@
-# Stripe PaymentIntent API Integration
+<h1 align="center"> Stripe PaymentIntent API Integration [![npm-version][npm-badge]][npm-link] </h1>
 
-Welcome to the ecommerce store for Sneakers!
+Welcome to the Trailblazer Sneaker shop!
 
-![Sneakerfeather](images/Shoe_feather.png)
+<div align="center">
+<img src="images/Shoe_feather.png" alt="hero image" width="400"/>
+</div>
 
 As an owner of an ecommerce store, you will want to integrate with the payments API for Stripe. This is a simple way to build a checkout form that collects card details. Included are some basic build and run scripts you can use to start up the application.
 
