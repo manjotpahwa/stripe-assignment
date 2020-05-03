@@ -22,6 +22,17 @@ This guide is an integration with the PaymentIntents API for  Stripe.
 
 ## Setup
 
+### Requirements
+You’ll need the following:
+
+1. Python >= 3.6
+1. Modern browser that supports ES6.
+1. Stripe account to accept payments (sign up for free).
+
+In your Stripe Dashboard, you can enable the payment methods you’d like to test.
+
+In order to complete the request and update inventory, we need to receive a real-time webhook notification. We're using the Stripe CLI to forward webhook events to our local development server.
+
 ### Config
 Set your environment variables STRIPE_PUBLISHABLE_KEY and
 STRIPE_WEBHOOK_SECRE using the following commands:
@@ -61,6 +72,24 @@ npm install
 ```
 npm start
 ```
+
+### Forward events to webhook using Stripe CLI
+1. Follow the instructions [here](https://stripe.com/docs/payments/handling-payment-events#install-cli) to install Stripe CLI and login into your account.
+1. Forward events locally to your webhook using:
+```
+stripe listen --forward-to http://localhost:4242/webhook
+```
+
+In a different terminal tab, use the following:
+```
+stripe trigger payment_intent.succeeded
+```
+
+You should be able to see the following:
+```
+[200 POST] OK payment_intent.succeeded
+```
+
 
 ### Successful Payment Test
 
