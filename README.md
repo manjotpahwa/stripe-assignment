@@ -2,7 +2,7 @@
 
 Welcome to the ecommerce store for Sneakers!
 
-![Sneakerfeather](https://github.com/manjotpahwa/stripe-assignment/images/Shoe_feather.jpg)
+![Sneakerfeather](https://github.com/manjotpahwa/stripe-assignment/images/Shoe_feather.png)
 
 As an owner of an ecommerce store, you will want to integrate with the payments API for Stripe. This is a simple way to build a checkout form that collects card details. Included are some basic build and run scripts you can use to start up the application.
 
