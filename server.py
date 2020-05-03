@@ -6,12 +6,13 @@ import json
 import os
 import stripe
 import cart
+import config
 import inventory
 
 from flask import Flask, render_template, jsonify, request
 
-stripe.api_key = "sk_test_edhurKZR5OMK0Wvl7uYLyu1n"
-webhook_secret = "whsec_K8reb65yXmHSEyKkSMx8h84rozwb5R69"
+stripe.api_key =  config.STRIPE_API_KEY
+webhook_secret = config.WEBHOOK_SECRET
 
 
 app = Flask(__name__, static_folder=".",
