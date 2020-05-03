@@ -12,6 +12,15 @@ As an owner of an ecommerce store, you will want to integrate with the payments 
 
 ## Setup
 
+### Config
+Set your environment variables STRIPE_PUBLISHABLE_KEY and
+STRIPE_WEBHOOK_SECRE using the following commands:
+
+```
+export STRIPE_PUBLISHABLE_KEY = <your_key>
+export STRIPE_WEBHOOK_SECRET = <your_secret>
+```
+
 ### Build & Run
 
 1. Build the backend server
