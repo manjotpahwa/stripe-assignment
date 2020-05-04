@@ -99,8 +99,9 @@ You should be able to see the following:
 [200 POST] OK payment_intent.succeeded
 ```
 
+### Testing
 
-### Successful Payment Test
+#### Successful Payment Test
 
 1. Verify your cart is full of the items Nike Zoom Fly 2 units by going to http://localhost:4242/get-cart. Your total of 300 should be visible at http://localhost:4242/get-total.
 
@@ -109,7 +110,7 @@ You should be able to see the following:
 1. Verify your total is now 0 and you cart is now empty by going to http://localhost:4242/get-total and  http://localhost:4242/get-cart respectively.
 
 
-### Successful Payment with Authentication Test
+#### Successful Payment with Authentication Test
 
 1. Verify your cart is full of the items Nike Zoom Fly 2 units by going to http://localhost:4242/get-cart. Your total of 300 should be visible at http://localhost:4242/get-total.
 
@@ -118,7 +119,7 @@ You should be able to see the following:
 1. Verify your total is now 0 and you cart is now empty by going to http://localhost:4242/get-total and  http://localhost:4242/get-cart respectively.
 
 
-### Insufficient Balance Test
+#### Insufficient Balance Test
 
 1. Verify your cart is full of the items Nike Zoom Fly 2 units by going to http://localhost:4242/get-cart. Your total of 300 should be visible at http://localhost:4242/get-total.
 
