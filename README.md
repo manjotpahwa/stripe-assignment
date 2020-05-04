@@ -23,8 +23,7 @@ This guide is an integration with the PaymentIntents API for  Stripe.
 ## Features
 |     | Features
 :---: | :---
-✨ | **Simple UI for card payments**. This demo uses pre-built Stripe components customized to fit the app design, including the [Card Element](https://stripe.com/docs/elements) which provides real-time validation, formatting, and autofill.
-🌍 | **Payment methods for Europe and Asia.** A dozen redirect-based payment methods are supported through the [Sources API](https://stripe.com/docs/sources), from [iDEAL](https://stripe.com/docs/sources/ideal) to [WeChat Pay](https://stripe.com/docs/sources/wechat-pay).
+✨ | **Simple UI for card payments**. This demo uses pre-built Stripe components, including the [Card Element](https://stripe.com/docs/elements) which provides real-time validation.
 🔐 | **Dynamic 3D Secure for Visa and Mastercard.** The app automatically handles the correct flow to complete card payments with [3D Secure](https://stripe.com/docs/payments/dynamic-3ds), whether it’s required by the card or encoded in one of your [3D Secure Radar rules](https://dashboard.stripe.com/radar/rules).
 🚀 | **Built-in proxy for local HTTPS and webhooks.** Card payments require HTTPS and asynchronous payment methods with redirects rely on webhooks to complete transactions—[ngrok](https://ngrok.com/) is integrated so the app is served locally over HTTPS. The [Stripe CLI](https://github.com/stripe/stripe-cli#listen) is used to forward webhook events to the local server.
 📦 | **No datastore required.** Customers are stored using the [Stripe API](https://stripe.com/docs/api/products) and inventory is in memory, so you don't need a database to keep track of products.
@@ -109,6 +108,14 @@ You should be able to see the following:
 
 1. Verify your total is now 0 and you cart is now empty by going to http://localhost:4242/get-total and  http://localhost:4242/get-cart respectively.
 
+1. Your webhook listener should report events such as:
+
+```
+2020-05-04 11:13:57  <--  [200] POST http://localhost:4242/webhook [evt_1Gex9GG8lTpkPNJEk7vB6cJR]
+2020-05-04 11:14:05   --> payment_intent.succeeded [evt_1Gex9OG8lTpkPNJEOMkO3Sqp]
+2020-05-04 11:14:05   --> charge.succeeded [evt_1Gex9OG8lTpkPNJEjnEMPWZK]
+2020-05-04 11:14:05  <--  [200] POST http://localhost:4242/webhook [evt_1Gex9OG8lTpkPNJEjnEMPWZK]
+```
 
 #### Successful Payment with Authentication Test
 
@@ -118,6 +125,14 @@ You should be able to see the following:
 
 1. Verify your total is now 0 and you cart is now empty by going to http://localhost:4242/get-total and  http://localhost:4242/get-cart respectively.
 
+1. Your webhook listener should report events such as:
+
+```
+2020-05-04 11:13:57  <--  [200] POST http://localhost:4242/webhook [evt_1Gex9GG8lTpkPNJEk7vB6cJR]
+2020-05-04 11:14:05   --> payment_intent.succeeded [evt_1Gex9OG8lTpkPNJEOMkO3Sqp]
+2020-05-04 11:14:05   --> charge.succeeded [evt_1Gex9OG8lTpkPNJEjnEMPWZK]
+2020-05-04 11:14:05  <--  [200] POST http://localhost:4242/webhook [evt_1Gex9OG8lTpkPNJEjnEMPWZK]
+```
 
 #### Insufficient Balance Test
 
@@ -126,3 +141,15 @@ You should be able to see the following:
 1. Go to [http://localhost:3000/checkout](http://localhost:3000/checkout). Enter your name and email address in the form provided. Enter card details "4000 0000 0000 9995" for testing a successful payment. Enter any valid values for the rest of the options such as CVV, expiration date and zip code. Press "Pay". You should see the payment go through successfully.
 
 1. Verify your total is still 300 and you cart is full of the same items by going to http://localhost:4242/get-total and  http://localhost:4242/get-cart respectively.
+
+1. Your webhook listener should report events such as:
+
+```
+2020-05-04 13:05:39  <--  [200] POST http://localhost:4242/webhook [evt_1GeytdG8lTpkPNJECVG7uZI0]
+2020-05-04 13:05:40   --> payment_intent.created [evt_1GeyteG8lTpkPNJEe5k4r8cd]
+2020-05-04 13:05:40  <--  [200] POST http://localhost:4242/webhook [evt_1GeyteG8lTpkPNJEe5k4r8cd]
+2020-05-04 13:05:45   --> charge.failed [evt_1GeytjG8lTpkPNJEoV9XSQva]
+2020-05-04 13:05:45  <--  [200] POST http://localhost:4242/webhook [evt_1GeytjG8lTpkPNJEoV9XSQva]
+2020-05-04 13:05:46   --> payment_intent.payment_failed [evt_1GeytjG8lTpkPNJEDkm5R1qb]
+2020-05-04 13:05:46  <--  [200] POST http://localhost:4242/webhook [evt_1GeytjG8lTpkPNJEDkm5R1qb]
+```
