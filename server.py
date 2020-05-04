@@ -12,7 +12,7 @@ import inventory
 from flask import Flask, render_template, jsonify, request
 
 stripe.api_key =  config.STRIPE_API_KEY
-webhook_secret = config.WEBHOOK_SECRET
+webhook_secret = config.STRIPE_WEBHOOK_SECRET
 
 
 app = Flask(__name__, static_folder=".",

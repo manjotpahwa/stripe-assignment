@@ -29,8 +29,6 @@ You’ll need the following:
 1. Modern browser that supports ES6.
 1. Stripe account to accept payments (sign up for free).
 
-In your Stripe Dashboard, you can enable the payment methods you’d like to test.
-
 In order to complete the request and update inventory, we need to receive a real-time webhook notification. We're using the Stripe CLI to forward webhook events to our local development server.
 
 ### Config
@@ -38,8 +36,8 @@ Set your environment variables STRIPE_PUBLISHABLE_KEY and
 STRIPE_WEBHOOK_SECRE using the following commands:
 
 ```
-export STRIPE_PUBLISHABLE_KEY = <your_key>
-export STRIPE_WEBHOOK_SECRET = <your_secret>
+export STRIPE_PUBLISHABLE_KEY=<your_key>
+export STRIPE_WEBHOOK_SECRET=<your_secret>
 ```
 
 ### Build & Run
