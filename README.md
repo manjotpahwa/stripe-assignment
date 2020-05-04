@@ -22,7 +22,7 @@ This guide is an integration with the PaymentIntents API for  Stripe.
 
 ## Setup
 
-![setup](images/Stripe_PaymentIntent_1.2020-05-04 11_21_40.gif)
+<img src="images/Stripe_PaymentIntent_1.2020-05-04 11_21_40.gif" width="800" />
 
 ### Requirements
 You’ll need the following:
