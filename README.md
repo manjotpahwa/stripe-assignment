@@ -20,6 +20,15 @@ This guide is an integration with the PaymentIntents API for  Stripe.
 1. Webhooks wait on hearing about the successful completion of the charge and perform post payment actions.
 
 
+## Features
+|     | Features
+:---: | :---
+✨ | **Simple UI for card payments**. This demo uses pre-built Stripe components customized to fit the app design, including the [Card Element](https://stripe.com/docs/elements) which provides real-time validation, formatting, and autofill.
+🌍 | **Payment methods for Europe and Asia.** A dozen redirect-based payment methods are supported through the [Sources API](https://stripe.com/docs/sources), from [iDEAL](https://stripe.com/docs/sources/ideal) to [WeChat Pay](https://stripe.com/docs/sources/wechat-pay).
+🔐 | **Dynamic 3D Secure for Visa and Mastercard.** The app automatically handles the correct flow to complete card payments with [3D Secure](https://stripe.com/docs/payments/dynamic-3ds), whether it’s required by the card or encoded in one of your [3D Secure Radar rules](https://dashboard.stripe.com/radar/rules).
+🚀 | **Built-in proxy for local HTTPS and webhooks.** Card payments require HTTPS and asynchronous payment methods with redirects rely on webhooks to complete transactions—[ngrok](https://ngrok.com/) is integrated so the app is served locally over HTTPS. The [Stripe CLI](https://github.com/stripe/stripe-cli#listen) is used to forward webhook events to the local server.
+📦 | **No datastore required.** Customers are stored using the [Stripe API](https://stripe.com/docs/api/products) and inventory is in memory, so you don't need a database to keep track of products.
+
 ## Setup
 
 <img src="images/Stripe_PaymentIntent_1.2020-05-04 11_21_40.gif" width="800" />
