@@ -53,14 +53,13 @@ export STRIPE_WEBHOOK_SECRET=<your_secret>
 
 ### Build & Run backend server
 
-1. Build the backend server
+1. Install all requirements for the backend server.
 
 ```
 pip3 install -r requirements.txt
 ```
 
-2. Run the server
-Specify the FLASK_APP environment variable and the FLASK_ENV (so that you can see debug logs for a local run of the app).
+2. Run the server: Specify the FLASK_APP environment variable for the target server and the FLASK_ENV environment variable so that you can see debug logs for a local run of the app.
 
 ```
 export FLASK_APP=server.py
