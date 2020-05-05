@@ -44,7 +44,7 @@ In order to complete the request and update inventory, we need to receive a real
 
 ### Config
 Set your environment variables STRIPE_SECRET_KEY and
-STRIPE_WEBHOOK_SECRE using the following commands:
+STRIPE_WEBHOOK_SECRET using the following commands:
 
 ```
 export STRIPE_SECRET_KEY=<your_key>
