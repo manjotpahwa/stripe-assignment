@@ -27,6 +27,7 @@ This guide is an integration with the PaymentIntents API for  Stripe.
 🔐 | **Dynamic 3D Secure for Visa and Mastercard.** The app automatically handles the correct flow to complete card payments with [3D Secure](https://stripe.com/docs/payments/dynamic-3ds), whether it’s required by the card or encoded in one of your [3D Secure Radar rules](https://dashboard.stripe.com/radar/rules).
 🚀 | **Built-in proxy for local HTTPS and webhooks.** Card payments require HTTPS and asynchronous payment methods with redirects rely on webhooks to complete transactions—[ngrok](https://ngrok.com/) is integrated so the app is served locally over HTTPS. The [Stripe CLI](https://github.com/stripe/stripe-cli#listen) is used to forward webhook events to the local server.
 📦 | **No datastore required.** Customers are stored using the [Stripe API](https://stripe.com/docs/api/products) and inventory is in memory, so you don't need a database to keep track of products.
+🔧 | **Payment Logs.** You can access the payment logs stored in the file demo.log.
 
 ## Setup
 
