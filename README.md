@@ -96,7 +96,7 @@ You should be able to see the following:
 npm install
 ```
 
-1. Run the client app.
+2. Run the client app.
 
 ```
 npm start
