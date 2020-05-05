@@ -84,7 +84,7 @@ def hello_world():
 
 @app.route('/get-products-in-stock', methods=['GET'])
 def get_products_in_stock():
-    return curr_inventory.get_products_in_stock(), 200
+    return jsonify(curr_inventory.get_products_in_stock()), 200
 
 
 @app.route('/get-cart', methods=['GET'])
@@ -92,7 +92,7 @@ def get_cart():
     try:
         app.logger.info("Showing cart: ")
         app.logger.info(curr_cart.get_items())
-        return curr_cart.get_items(), 200
+        return jsonify(curr_cart.get_items()), 200
     except Exception as e:
         app.logger.error("Error showing cart: " + str(e))
         return jsonify(error=str(e)), 403
