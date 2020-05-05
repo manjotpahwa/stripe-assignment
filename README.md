@@ -43,7 +43,7 @@ You’ll need the following:
 In order to complete the request and update inventory, we need to receive a real-time webhook notification. We're using the Stripe CLI to forward webhook events to our local development server.
 
 ### Config
-Set your environment variables STRIPE_PUBLISHABLE_KEY and
+Set your environment variables STRIPE_SECRET_KEY and
 STRIPE_WEBHOOK_SECRE using the following commands:
 
 ```
