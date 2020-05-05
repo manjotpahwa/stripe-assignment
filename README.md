@@ -90,13 +90,13 @@ You should be able to see the following:
 
 ### Build & Run the client app
 
-1. Build the frontend client app
-Run the following to install all dependencies needed.
+1. Build the frontend client app: Run the following to install all dependencies needed.
+
 ```
 npm install
 ```
 
-1. Run the client app
+1. Run the client app.
 
 ```
 npm start
