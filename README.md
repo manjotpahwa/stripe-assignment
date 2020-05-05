@@ -47,11 +47,11 @@ Set your environment variables STRIPE_SECRET_KEY and
 STRIPE_WEBHOOK_SECRE using the following commands:
 
 ```
-export STRIPE_PUBLISHABLE_KEY=<your_key>
+export STRIPE_SECRET_KEY=<your_key>
 export STRIPE_WEBHOOK_SECRET=<your_secret>
 ```
 
-### Build & Run
+### Build & Run backend server
 
 1. Build the backend server
 
@@ -70,20 +70,10 @@ python3 -m flask run --port=4242
 Navigate to http://localhost:4242/ to verify your server is up and running. 
 To view your total amount go to http://localhost:4242/get-total and to view your cart go to http://localhost:4242/get-cart
 
-3. Build the frontend client app
-Run the following to install all dependencies needed.
-```
-npm install
-```
-
-4. Run the client app
-
-```
-npm start
-```
-
 ### Forward events to webhook using Stripe CLI
+
 1. Follow the instructions [here](https://stripe.com/docs/payments/handling-payment-events#install-cli) to install Stripe CLI and login into your account.
+
 1. Forward events locally to your webhook using:
 ```
 stripe listen --forward-to http://localhost:4242/webhook
@@ -98,6 +88,21 @@ You should be able to see the following:
 ```
 [200 POST] OK payment_intent.succeeded
 ```
+
+### Build & Run the client app
+
+1. Build the frontend client app
+Run the following to install all dependencies needed.
+```
+npm install
+```
+
+1. Run the client app
+
+```
+npm start
+```
+
 
 ### Testing
 
