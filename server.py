@@ -8,8 +8,11 @@ import stripe
 import cart
 import config
 import inventory
+import logging
+from logging.handlers import RotatingFileHandler
 
 from flask import Flask, render_template, jsonify, request
+from flask.logging import default_handler
 
 stripe.api_key =  config.STRIPE_API_KEY
 webhook_secret = config.STRIPE_WEBHOOK_SECRET
@@ -17,6 +20,12 @@ webhook_secret = config.STRIPE_WEBHOOK_SECRET
 
 app = Flask(__name__, static_folder=".",
             static_url_path="", template_folder=".")
+app.logger.addHandler(default_handler)
+handler = RotatingFileHandler(
+    'demo.log', maxBytes=(1048576*5), backupCount=7
+)
+app.logger.addHandler(handler)
+app.logger.setLevel(logging.DEBUG)
 
 curr_inventory = inventory.Inventory()
 # TODO(manjot): This cart is silly and a blanket one irrespective of customers.
